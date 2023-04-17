@@ -38,7 +38,7 @@ Implemented integrations with third party services:
 
 **TDD/OOP**
 
-Big fan of design patterns (my fav `Factory, Strategy, Observer, Chain of Responcibility`) and refactoring...
+Big fan of design patterns (my fav `Factory, Strategy, Observer, Chain of Responcibility`), corp patterns and refactoring...
 Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development and profiling.
  
  | Subject | Tools |
@@ -55,11 +55,13 @@ Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development 
  
    Worked as a fullstack middle+ web developer. 
    
-   On the frontend worked with `NextJs11` and `Ant Design`. Built payment, billing, pricing plan and user settings pages. Added different menus, buttons, switchers and icons to the UI. Implemented multilanguage translation and localization, using `i18Next` and SSG for landing page:  [https://qrepublik.com/](https://qrepublik.com/)
+   On the frontend worked with `NextJs11` and `Ant Design`. Built payment, billing, pricing plan and user settings pages. Added debounce search, different menus, buttons, switchers and icons to the UI. Implemented multilanguage translation and localization, using `i18Next` and SSG for landing page:  [https://qrepublik.com/](https://qrepublik.com/)
    
-   On the backend developed web app RESTful api using `Laravel9` and documented it with `Swagger`. Developed country balancer(according to user country, it redirects to different servers), registration(with encryption of user data according to GPDR), authentication(with two factor auth), qr-code generator(with image uploading and editing), corp section with dashboard for analitics for three roles(departments, managers, employes) and so on... 
-   - To see production build, please visit: [https://my.qrepublik.id/auth](https://my.qrepublik.id/auth) 
+   On the backend developed web app RESTful api using `Laravel9` and documented it with `Swagger`. Developed country balancer(according to user country, it redirects to different servers), registration(with encryption of user data according to GPDR), authentication(with two factor auth), qr-code generator(with image uploading and editing), corp section(four roles) with dashboard for analitics, etc. 
+      - To see production build, please visit: [https://my.qrepublik.id/auth](https://my.qrepublik.id/auth) 
    - Description of api routes and features can be found here:  [https://apidev.qrepublik.id/api/documentation](https://apidev.qrepublik.id/api/documentation)
+   
+   Did `code reviews`, `CI/CD` with GitLab runner and `Envoy`, migration of old users to new version of app, held presentations for `Starta fond` and so on...
  
 **2. picsAI 2022**
  
@@ -69,17 +71,30 @@ Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development 
  - Please visit: [https://img.inc.moe/](https://img.inc.moe/) 
  - Source code: 
  
-  Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend routes for uploading files and resiving json data were created using `Node Js + Express + Mongo Db`. 
+  Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend, routes for uploading files and resiving json data were created using `Node Js + Express + Mongo Db`. 
  
-  Everything was deployed to VPS as `Docker` containers, using `gitHub` actions and `Nginx` as a reverse proxy. 
+  Everything was deployed to VPS as `Docker` containers, using `gitHub` actions and `Nginx` as a reverse proxy. A presentation for `Fasie fond` was held.
  - Please visit: [https://picsai.inc.moe/](https://picsai.inc.moe/) 
- - frontend source code: 
- - backend source code: 
+ - Frontend source code: 
+ - Backend source code: 
+ 
+**3. STATiST 2020-2023
 
+Working as a fullstack senior web developer and devOps.
 
- **Last Advanced Payed Training**
+Developed a `PHP parser` with RESTful api for collecting and storing data in `MySql` database from the biggest real-estate adv board. Implemented a DI container, middlewares, router, logging, html parsing, async requests and more without any libs.
+- Backend source code: [https://github.com/BorisWild/cyanide_parser](https://github.com/BorisWild/cyanide_parser)
+
+A frontend is built with `TypeScript+React+Chackra UI`, but it is going to be rewriten with `NextJs13`. It is a tool for investors. To track the Moscow real-estate market using line indexes of offers amount and an archive of deleted commercial from the adv board site.
+- Please visit: [https://statist.inc.moe/](https://statist.inc.moe/) 
+- Frontend source code: [https://github.com/BorisWild/cyanide_front](https://github.com/BorisWild/cyanide_front)
+
+### Last Advanced Payed Training
  - 2020: RefactoringGuru - Design Patterns and Refactoring Methods
  - 2022: Google - TensorFlow Js
+
+## More Skills
+
  
  
  
