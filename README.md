@@ -50,6 +50,15 @@ Implemented integrations with third party services:
  | *back* | Jest + Supertest |
  | **SQL** | DBMS_profiler, SQL Trace&TKProf|
  
+ ## Top 5 Projects
+ 1. **QRepublik**
+ ([QRepublik - WebApp](https://my.qrepublik.id/auth))
+   Worked as a fullstack middle+ web developer. As a backend dev, build web app api using Laravel9 and documented it with Swagger. Developed counry balancer(according to user country it redirects to different servers), registration(with encrypting user data according to RGPD), authentication(with two factor auth), qr-code generator(with image uploading and editing), corp dashboard(for analitics) and so on. To see
+ 
+ **Last Advanced Training**
+ - 2020: RefactoringGuru - Design Patterns and Refactoring Methods
+ - 2022: Google - TensorFlow Js
+ 
  
  
  
