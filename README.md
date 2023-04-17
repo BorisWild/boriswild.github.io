@@ -1,6 +1,11 @@
-<base target="_blank">
+*Please click on links holding CTRL, to open them in a new tab.*
+
+---
+
+
+
 # Boris Wilde
-- dob: 1986.12.09
+- dob: 1986.12.09 Moscow
 - coding since 2000 *...started from Basic :))*
 
 ## FullStack Web Dev
@@ -64,21 +69,22 @@ Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development 
   Worked as a fullstack senior web developer and devOps.
  
   Developed an interactive tool for generating big amount of data, using `React Js` and for training a model on this data with `Tensorflow Js`. 
- - Please visit: [https://img.inc.moe/](https://img.inc.moe/) 
- - Source code: 
- 
+ - Please visit: [https://img.inc.moe/](https://img.inc.moe/)
+ - Frontend source code: [https://github.com/BorisWild/rgb-teacher](https://github.com/BorisWild/rgb-teacher)
+ - Backend source code: *on demand*
+  
   Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend, routes for uploading files and resiving json data were created using `Node Js + Express + Mongo Db`. 
  
   Everything was deployed to VPS as `Docker` containers, using `gitHub` actions and `Nginx` as a reverse proxy. A presentation for `Fasie fond` was held.
  - Please visit: [https://picsai.inc.moe/](https://picsai.inc.moe/) 
- - Frontend source code: 
- - Backend source code: 
+ - Source code: [https://github.com/BorisWild/picsAi](https://github.com/BorisWild/picsAi)
+
  
 ### 3. STATiST 2020-2023
 
 Working as a fullstack senior web developer and devOps.
 
-Developed a `PHP parser` with RESTful api for collecting and storing data in `MySql` database from the biggest real-estate adv board. Implemented a DI container, middlewares, router, logging, html parsing, async requests and more without any libs.
+Developed a `PHP parser` with RESTful api for collecting and storing data in `MySql` database from the biggest real-estate adv board. Implemented a DI container, middlewares, router, logging, html parsing, async requests and more without any libs. Deployed to shared hosting and executed daily by `CRON`.
 - Backend source code: [https://github.com/BorisWild/cyanide_parser](https://github.com/BorisWild/cyanide_parser)
 
 A frontend is built with `TypeScript+React+Chackra UI`, but it is going to be rewriten with `NextJs13`. It is a tool for investors. To track the Moscow real-estate market using line indexes of offers amount and an archive of deleted commercial from the adv board site.
