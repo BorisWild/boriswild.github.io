@@ -1,3 +1,4 @@
+<base target="_blank">
 # Boris Wilde
 - dob: 1986.12.09
 - coding since 2000 *...started from Basic :))*
