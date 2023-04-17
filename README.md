@@ -18,7 +18,7 @@
 |  *backEnd*      | Node Js + Exspress                 |
 |  *ml*           | TensorFlow Js
 |  **CSS**        | Tailwind, Styled Comps, SaSS                 |
-|  **Data**       | MySql, MongoDb, SqlLite, Manticore/Sphinx(as ElasticSearch), FireBase                 |
+|  **Data**       | MySql, MongoDb, SqlLite, Manticore/Sphinx (as ElasticSearch), FireBase                 |
 |  **Linux**      | Docker, Nginx                 |
 | **CI/CD**| git, GitLab Runner, GitHub Actions |
 | **C++**| Arduino|
@@ -98,7 +98,7 @@ A frontend is built with `TypeScript+React+Chackra UI`, but it is going to be re
 
 ## More Skills
 
-Graduated from university as a graphic designer in 2012. For six years worked as a motion/graphic designer in different companies: `MTV, RenTV, MatchTV`. My common tools are: `Figma, Photoshop, Illustrator, AfterEffects, Cinema 4d`. [https://vimeo.com/25seconds](https://vimeo.com/25seconds) 
+Graduated from university as a graphic designer in 2012. For six years worked as a motion/graphic designer in different companies: `MTV, RenTV, MatchTV`. My common tools were: `Figma, Photoshop, Illustrator, AfterEffects, Cinema 4d`. [https://vimeo.com/25seconds](https://vimeo.com/25seconds) 
  
  
  
