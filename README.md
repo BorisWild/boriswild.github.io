@@ -38,8 +38,8 @@ Implemented integrations with third party services:
 
 **TDD/OOP**
 
- Big fan of design patterns (my fav `Factory, Strategy, Observer, Chain of Responcibility`) and refactoring...
- Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development and profiling.
+Big fan of design patterns (my fav `Factory, Strategy, Observer, Chain of Responcibility`) and refactoring...
+Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development and profiling.
  
  | Subject | Tools |
  |-----|-----|
@@ -50,8 +50,8 @@ Implemented integrations with third party services:
  | *back* | Jest + Supertest |
  | **SQL** | DBMS_profiler, SQL Trace&TKProf|
  
- ## Top Projects
- **1. QRepublik 2021-2022** 
+## Top Projects
+**1. QRepublik 2021-2022** 
  
    Worked as a fullstack middle+ web developer. 
    
@@ -61,17 +61,22 @@ Implemented integrations with third party services:
    - To see production build, please visit: [https://my.qrepublik.id/auth](https://my.qrepublik.id/auth) 
    - Description of api routes and features can be found here:  [https://apidev.qrepublik.id/api/documentation](https://apidev.qrepublik.id/api/documentation)
  
- **2. picsAI 2022**
+**2. picsAI 2022**
  
-  Worked as a fullstack sinior web developer and devOps.
+  Worked as a fullstack senior web developer and devOps.
  
- Developed an interactive tool for generating big amount of data, using `React Js` and for training a model on this data with `Tensorflow Js`.
+  Developed an interactive tool for generating big amount of data, using `React Js` and for training a model on this data with `Tensorflow Js`. 
+ - Please visit: [https://img.inc.moe/](https://img.inc.moe/) 
+ - Source code: 
  
- Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend routes for uploading files and resiving json data were created using `Node Js + Express + Mongo Db`.
+  Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend routes for uploading files and resiving json data were created using `Node Js + Express + Mongo Db`. 
  
- Everything was deployed to VPS as `Docker` containers using `gitHub` actions and `Nginx` as a reverse proxy. 
- 
- 
+  Everything was deployed to VPS as `Docker` containers, using `gitHub` actions and `Nginx` as a reverse proxy. 
+ - Please visit: [https://picsai.inc.moe/](https://picsai.inc.moe/) 
+ - frontend source code: 
+ - backend source code: 
+
+
  **Last Advanced Payed Training**
  - 2020: RefactoringGuru - Design Patterns and Refactoring Methods
  - 2022: Google - TensorFlow Js
