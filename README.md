@@ -1,14 +1,9 @@
 # Boris Wilde
 - dob: 1986.12.09
-- city: Moscow, Sochi
+- coding since 2000 *...started from Basic :))*
 
-## Skills:
-
-### FullStack Web Dev
-
-**STACK**
-
-| Base      | Tools |
+## FullStack Web Dev
+| Stack      | Tools |
 | ----------- | ----------- |
 | **PHP** (7.4-8.2)| Laravel, Slim, Swagger       |
 | **JS\TypeScript**                  |          |
@@ -24,7 +19,7 @@
 
 
 
-**INTEGRATIONS**
+### INTEGRATIONS
 
 Implemented integrations with third party services:
 
@@ -36,9 +31,9 @@ Implemented integrations with third party services:
 | cloud storage| Aws S3
 
 
-**TDD/OOP**
+### OOP/TDD/MVC/DDD
 
-Big fan of design patterns (my fav `Factory, Strategy, Observer, Chain of Responcibility`), corp patterns and refactoring...
+Big fan of design patterns (my fav `Factory, Strategy, Observer, Chain of Responcibility`), layered architecture and refactoring...
 Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development and profiling.
  
  | Subject | Tools |
@@ -51,7 +46,7 @@ Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development 
  | **SQL** | DBMS_profiler, SQL Trace&TKProf|
  
 ## Top Projects
-**1. QRepublik 2021-2022** 
+### 1. QRepublik 2021-2022 
  
    Worked as a fullstack middle+ web developer. 
    
@@ -63,7 +58,7 @@ Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development 
    
    Did `code reviews`, `CI/CD` with GitLab runner and `Envoy`, migration of old users to new version of app, held presentations for `Starta fond` and so on...
  
-**2. picsAI 2022**
+### 2. picsAI 2022
  
   Worked as a fullstack senior web developer and devOps.
  
@@ -78,7 +73,7 @@ Passionate about clean code(`SOLID, DRY, KISS, YAGNI`), test-driven development 
  - Frontend source code: 
  - Backend source code: 
  
-**3. STATiST 2020-2023
+### 3. STATiST 2020-2023
 
 Working as a fullstack senior web developer and devOps.
 
@@ -90,12 +85,13 @@ A frontend is built with `TypeScript+React+Chackra UI`, but it is going to be re
 - Frontend source code: [https://github.com/BorisWild/cyanide_front](https://github.com/BorisWild/cyanide_front)
 
 ### Last Advanced Payed Training
+ - 2019: TheNetNinjia - Modern JavaScript / ReactJS + FireBase
  - 2020: RefactoringGuru - Design Patterns and Refactoring Methods
  - 2022: Google - TensorFlow Js
 
 ## More Skills
 
- 
+Graduated from university as a graphic designer in 2012. For six years worked as a motion/graphic designer in different companies: `MTV, RenTV, MatchTV`. My common tools are: `Figma, Photoshop, Illustrator, AfterEffects, Cinema 4d`. [https://vimeo.com/25seconds](https://vimeo.com/25seconds) 
  
  
  
