@@ -51,15 +51,26 @@ Implemented integrations with third party services:
  | **SQL** | DBMS_profiler, SQL Trace&TKProf|
  
  ## Top Projects
- 1. **QRepublik 2021-2022** 
+ **1. QRepublik 2021-2022** 
  
    Worked as a fullstack middle+ web developer. 
    
-   On the frontend worked with `NextJs11` and `Ant Design`. Built payment, billing, pricing plan and user settings pages. Added different menus, buttons, switchers and icons. Implemented multilanguage translation and localization, using `i18Next` and SSG for landing page:  [https://qrepublik.com/](https://qrepublik.com/)
+   On the frontend worked with `NextJs11` and `Ant Design`. Built payment, billing, pricing plan and user settings pages. Added different menus, buttons, switchers and icons to the UI. Implemented multilanguage translation and localization, using `i18Next` and SSG for landing page:  [https://qrepublik.com/](https://qrepublik.com/)
    
    On the backend developed web app RESTful api using `Laravel9` and documented it with `Swagger`. Developed country balancer(according to user country, it redirects to different servers), registration(with encryption of user data according to GPDR), authentication(with two factor auth), qr-code generator(with image uploading and editing), corp section with dashboard for analitics for three roles(departments, managers, employes) and so on... 
    - To see production build, please visit: [https://my.qrepublik.id/auth](https://my.qrepublik.id/auth) 
    - Description of api routes and features can be found here:  [https://apidev.qrepublik.id/api/documentation](https://apidev.qrepublik.id/api/documentation)
+ 
+ **2. picsAI 2022**
+ 
+  Worked as a fullstack sinior web developer and devOps.
+ 
+ Developed an interactive tool for generating big amount of data, using `React Js` and for training a model on this data with `Tensorflow Js`.
+ 
+ Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend routes for uploading files and resiving json data were created using `Node Js + Express + Mongo Db`.
+ 
+ Everything was deployed to VPS as `Docker` containers using `gitHub` actions and `Nginx` as a reverse proxy. 
+ 
  
  **Last Advanced Payed Training**
  - 2020: RefactoringGuru - Design Patterns and Refactoring Methods
