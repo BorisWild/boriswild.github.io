@@ -11,11 +11,11 @@
 
 | Stack             | Tools                                                                  |
 |-------------------|------------------------------------------------------------------------|
-| **PHP** (7.4-8.2) | Laravel, Slim, Swagger                                                 |
+| **PHP** (7.4-8.2) | Laravel, Slim, Swagger, Doctrine ORM                                   |
 | **JS\TypeScript** |                                                                        |
 | *frontEnd*        | Next Js, React, Redux                                                  |
 |                   | Chackra UI, Material UI, Ant design                                    |
-| *backEnd*         | Node Js + Exspress                                                     |
+| *backEnd*         | Node Js + Express                                                      |
 | *ml*              | TensorFlow Js                                                          |
 | **CSS**           | Tailwind, Styled Comps, SaSS, BEM                                      |
 | **Data**          | MySql, MongoDb, SqlLite, Manticore/Sphinx (as ElasticSearch), FireBase |
