@@ -87,7 +87,7 @@ Also built a landing page, using `NextJs12` and `Styled components`, with docs a
 uploading files and receiving json data with async resizing and model predictions, were created using `Node Js + Express + TensorFlow + Mongo Db`.
 
 Everything was deployed to VPS as `Docker` containers, using `gitHub` actions and `Nginx` as a reverse proxy. A
-presentation for `Fasie fond` was held.
+presentation for `Fasie fond` was held. Unfortunately the accuracy of model is not perfect... We are working on it.
 
 - Please visit: [https://picsai.inc.moe/](https://picsai.inc.moe/)
 - Source code: [https://github.com/BorisWild/picsAi](https://github.com/BorisWild/picsAi)
