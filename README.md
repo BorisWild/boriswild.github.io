@@ -84,7 +84,7 @@ with `Tensorflow Js`.
 - Backend source code: *on demand*
 
 Also built a landing page, using `NextJs12` and `Styled components`, with docs about service. On the backend, routes for
-uploading files and receiving json data were created using `Node Js + Express + Mongo Db`.
+uploading files and receiving json data with async resizing and model predictions, were created using `Node Js + Express + TensorFlow + Mongo Db`.
 
 Everything was deployed to VPS as `Docker` containers, using `gitHub` actions and `Nginx` as a reverse proxy. A
 presentation for `Fasie fond` was held.
@@ -121,6 +121,7 @@ commercial from the adv board site.
 Graduated from university as a graphic designer in 2012. For six years worked as a motion/graphic designer in different
 companies: `MTV, RenTV, MatchTV`. My common tools
 were: `Figma, Photoshop, Illustrator, AfterEffects, Cinema 4d`. [https://vimeo.com/25seconds](https://vimeo.com/25seconds) 
+So most of the designs, logos, illustrations and fotos, which I used on sites, are made by myself.
 
 ## Contacts 
 **boriswild@gmail.com**
