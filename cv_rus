@@ -1,0 +1,140 @@
+*Пожалуйста кликайте по ссылкам с зажатой кнопкой CTRL, чтобы открыть в новой вкладке.*
+
+---
+
+# Борис Уайлд
+
+- др: 1986.12.09 Москва
+- программирую с 2000 *...начинал с Basic, читал первый печатный номер журнала Хакер :))*
+
+## FullStack Web Dev
+
+| Стек              | Инструменты                                                            |
+|-------------------|------------------------------------------------------------------------|
+| **PHP** (7.4-8.2) | Laravel, Slim, Swagger, Doctrine ORM                                   |
+| **JS\TypeScript** |                                                                        |
+| *frontEnd*        | Next Js, React, Redux                                                  |
+|                   | Chackra UI, Material UI, Ant design                                    |
+| *backEnd*         | Node Js + Express                                                      |
+| *ml*              | TensorFlow Js                                                          |
+| **CSS**           | Tailwind, Styled Comps, SaSS, BEM                                      |
+| **Data**          | MySql, MongoDb, SqlLite, Manticore/Sphinx (as ElasticSearch), FireBase |
+| **Linux**         | Docker, Nginx                                                          |
+| **CI/CD**         | git, GitLab Runner, GitHub Actions                                     |
+| **C++**           | Arduino                                                                |
+
+### Интеграции
+
+Создавал интеграции со следующими сервисами:
+
+| задача              | Сервисы                                |
+|---------------------|----------------------------------------|
+| оплата              | Stripe, Sber                           |
+| аутентификация      | Facebook, Google, Vk, esia             |
+| уведомления         | Telegram, WhatsApp, MessageBird, SmsRu |
+| облачные хранилища  | Aws S3                                 |
+
+### OOP/TDD/MVC/DDD
+
+Большой фанат паттернов проектирования(любимые `Factory, Strategy, Observer, Chain of Responcibility`), многослойной архитектуры, 
+рефакторинга и автоматизации...
+Стремлюсь к чистому коду и соблюдаю принципы(`SOLID, DRY, KISS, YAGNI`). Веду разработку через тесты и профайлинг.
+
+| Предмет тестирования     | Инструментарий                                |
+|-------------|--------------------------------------|
+| **PHP**     | PhpUnit, Xdebug, XHProf              |
+| **Laravel** | Telescope, DebugBar                  |
+| **JS**      |                                      |
+| *front*     | Jest + Puppetteer( headless browser) |
+| *back*      | Jest + Supertest                     |
+| **SQL**     | DBMS_profiler, SQL Trace&TKProf      |
+
+## Топ проекты
+
+### 1. QRepublik 2021-2022
+
+Работал в должности fullstack middle+ web разработчик.
+
+На фронтэнде работал с `NextJs11` и `Ant Design`. Разрабатывал и верстал страницы оплаты, подписки, пользовательских настроек, 
+двух-факторной аутентификации и т.д. А так же добавлял в интерфейс поиск с автокомплитом, разные меню, 
+иконки и кнопки, в зависимости от статуса и роли пользователя. Произвёл локализацию лендинга на 20 языков с помощью
+`i18Next` и SSG.
+
+На бекэнде разрабатывал RESTful api для вебприложения используя `Laravel9` и документируя его с помощью `Swagger`.
+Разрабатывал балансир перенаправляющий пользователей на разные серверы апи, в зависимости от страны регистрации. Делал 
+пошаговую регистрацию с шифрованием данных, для GPDR. Двух-факторную авторизацию, перевод апи на 20 языков, генерацию и 
+редактирование изображений с qr-code, корпоративный раздел с четырмя ролями и разделом аналитики, а так же многое другое. 
+
+- Документация бекэнда и характеристики:  
+[https://apidev.qrepublik.id/api/documentation](https://apidev.qrepublik.id/api/documentation)
+
+- Веб приложение: 
+[https://my.qrepublik.id/auth](https://my.qrepublik.id/auth)
+
+- Лендинг: 
+[https://qrepublik.com/](https://qrepublik.com/)
+
+На проекте делал код ревью, `CI/CD` с GitLab runner и `Envoy`, миграцию баз данных, вёл презентацию для англоязычного
+фонда `Starta`, проводил собеседования джунов на фронт и т.д. и т.п.
+
+### 2. picsAI 2022
+
+Работал в должности fullstack senior web разработчик и по совместительству devOps.
+
+С помощью `React Js` разработал уникальный интерактивный интерфейс для генерации большого количества данных под 
+машинное обучение с использованием `Tensorflow Js`.  
+
+- Веб приложение: [https://img.inc.moe/](https://img.inc.moe/)
+- Фронтэнд исходный код: [https://github.com/BorisWild/rgb-teacher](https://github.com/BorisWild/rgb-teacher)
+- Бекэнд исходный код(php api): *по запросу*
+
+Также разработал лендинг с документацией, используя `NextJs12` и `Styled components`, а так же возможностью тестирования модели. 
+Для асинхронной обработки данных(предсказаний модели и оптимизации изображений) бекэнд был реализован на 
+`Node Js + Express + TensorFlow + Mongo Db` .
+
+Всё было развернуто на VPS как `Docker` контейнеры, используя `gitHub` actions и `Nginx` как обратный прокси. 
+Проект подавал заявку на грант в фонд Содействия Инноваций. 
+К сожалению точность распознования модели ещй не высока... мы работаем над этим.
+
+- Лендинг: [https://picsai.inc.moe/](https://picsai.inc.moe/)
+- Исходный код: [https://github.com/BorisWild/picsAi](https://github.com/BorisWild/picsAi)
+
+### 3. STATiST 2020-2023
+
+Работал в должности fullstack senior web разработчик и по совместительству devOps.
+
+Разработал `PHP parser` with RESTful api for collecting and storing data in `MySql` database from the biggest
+real-estate adv board. Implemented a DI container, middlewares, router, logging, html parsing, async requests and more
+without any libs. Deployed to shared hosting and executed daily by `CRON`. Also had to collect a lot of `free proxies`
+and check them for anonymity, to make requests through them.
+
+- Backend source code: [https://github.com/BorisWild/cyanide_parser](https://github.com/BorisWild/cyanide_parser)
+
+A frontend is built with `TypeScript+React+Chackra UI`, but it is going to be rewritten with `NextJs13`. It is a tool
+for investors, to track the real-estate market using line indexes of offers and an archive of deleted
+commercial from the adv board site.
+
+- Please visit: [https://statist.inc.moe/](https://statist.inc.moe/)
+- Frontend source code: [https://github.com/BorisWild/cyanide_front](https://github.com/BorisWild/cyanide_front)
+
+### Повышение квалификации
+
+- 2019: TheNetNinja - Modern JavaScript / ReactJS + FireBase
+- 2020: RefactoringGuru - Design Patterns and Refactoring Methods
+- 2022: Google - TensorFlow Js
+
+## Дополнительные Навыки
+
+Закончил МХПИ факультет Графического дизайна в 2012. Шесть лет работал моушен\граф дизайнером в разных
+компаниях: `MTV, RenTV, MatchTV`. Мои инструменты были: `Figma, Photoshop, Illustrator, AfterEffects, Cinema 4d`. [https://vimeo.com/25seconds](https://vimeo.com/25seconds) 
+Так что большая часть дизайн-проектов, логотипов, иллюстраций и фотографий, что я использовал для разработки сайтов
+which I used on sites,
+
+## Контакты 
+**boriswild@gmail.com**
+ 
+ 
+ 
+ 
+ 
+ 
