@@ -76,8 +76,7 @@
       document.write("<span>" + questionObject.question + "</span>");
       let [question, answer] = questionObject.question.split('=');
 
-      console.log(answer,questionObject?.answer);
-      
+           
       if(Number(answer)===questionObject?.answer){
          document.write("<span> Ответ: " + questionObject.answer + "</span>");
       }else{
