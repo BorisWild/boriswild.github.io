@@ -75,6 +75,8 @@
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
       document.write("<span>" + questionObject.question + "</span>");
       let [question, answer] = questionObject.question.split('=');
+
+      console.log(answer,questionObject?.answer);
       
       if(answer===Number(questionObject?.answer)){
          document.write("<span> Ответ: " + questionObject.answer + "</span>");
