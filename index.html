@@ -42,7 +42,7 @@
 
     localStorage.setItem("question_" + localStorage.length, JSON.stringify(questionObject));
     
-    document.write("<p>Сколько <b>" + num1 + "</b> x <b>" + num2 + "</b>?</p>");
+    document.write("<p style='text-align:center'>Сколько <b>" + num1 + "</b> x <b>" + num2 + "</b>?</p>");
 
     for (var i = 0; i < answers.length; i++) {
       document.write("<button onclick='checkAnswer(" + answers[i] + "," + correctAnswer + "," + i + ")'>" + answers[i] + "</button>");
