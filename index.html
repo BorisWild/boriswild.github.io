@@ -51,12 +51,13 @@
       answerBtn.classList.add("incorrect");
     }
     const historyObj = JSON.parse(localStorage.getItem("question_" + (localStorage.length-1)));
-    console.log(historyObj, )
-    historyObj.answer = answerBtn.innerHtml;
     
+    
+    historyObj.answer = answerBtn.innerHtml;
+    console.log(historyObj)
     localStorage.setItem("question_" + localStorage.length, JSON.stringify(historyObj));
     
-    location.reload();
+    //location.reload();
   }
 
   function showPreviousQuestions() {
