@@ -60,7 +60,7 @@
     
     localStorage.removeItem("question_" + (localStorage.length-1));
     
-    historyObj.answer = answerBtn.textContent;
+    historyObj.answer = answerBtn.Number(textContent);
     
     
     
@@ -75,14 +75,8 @@
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
       document.write("<span>" + questionObject.question + "</span>");
       let [question, answer] = questionObject.question.split('=');
-
-      if(!answer){
-        answer='?';
-      }
-
-      console.log(answer)
       
-      if(answer+0===questionObject.answer){
+      if(answer===questionObject.answer){
          document.write("<span> Ответ: " + questionObject.answer + "</span>");
       }else{
          document.write("<span style='color: red'> Ответ: " + questionObject.answer + "</span>");
