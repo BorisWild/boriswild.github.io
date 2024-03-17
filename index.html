@@ -74,12 +74,16 @@
     for (var i = 0; i < localStorage.length; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
       document.write("<span>" + questionObject.question + "</span>");
-      const [question, answer] = questionObject.question.split('=');
-   
+      let [question, answer] = questionObject.question.split('=');
+
+      if(!answer){
+        answer='?';
+      }
+      
       if(answer==questionObject.answer){
          document.write("<span> Ответ: " + questionObject.answer + "</span>");
       }else{
-         document.write("<span  class='incorrect'> Ответ: " + questionObject.answer + "</span>");
+         document.write("<span style='color: red'> Ответ: " + questionObject.answer + "</span>");
       }
       document.write("<br>");
       
