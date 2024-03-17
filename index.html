@@ -73,7 +73,9 @@
     
     localStorage.setItem("question_" + localStorage.length, JSON.stringify(historyObj));
     
-    location.reload();
+    sleep(500).then(() => {
+      location.reload();
+    });
   }
 
    
@@ -106,6 +108,10 @@
     
   }
 
+  function sleep (time) {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  }
+  
   generateMultiplicationTable();
 </script>
 
