@@ -52,9 +52,12 @@
     }
     const historyObj = JSON.parse(localStorage.getItem("question_" + (localStorage.length-1)));
     
+    localStorage.removeItem=("question_" + (localStorage.length-1));
     
     historyObj.answer = answerBtn.innerHtml;
+    
     console.log(historyObj)
+    
     localStorage.setItem("question_" + localStorage.length, JSON.stringify(historyObj));
     
     //location.reload();
