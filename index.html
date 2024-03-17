@@ -9,10 +9,12 @@
       }
 
       .incorrect {
+        border-color: red;
         color: red;
       }
       
       .correct {
+        border-color: green;
         color: green;
       }
     
@@ -80,7 +82,7 @@
 
    
   function showPreviousQuestions() {
-    let totalAnswers;
+    let totalAnswers=0;
     
     for (var i = 0; i < localStorage.length-1; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
