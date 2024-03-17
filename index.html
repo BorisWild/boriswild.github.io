@@ -84,18 +84,21 @@
     
     for (var i = 0; i < localStorage.length-1; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
-      document.write("<span>" + (totalAnswers+1) + ". " + questionObject.question + "</span>");
-      let [question, answer] = questionObject.question.split('=');
-
+      
       if(!questionObject?.answer){
          break;
       }
+      
+      document.write("<span>" + (totalAnswers) + ". " + questionObject.question + "</span>");
+      
+      let [question, answer] = questionObject.question.split('=');
            
       if(Number(answer)===questionObject?.answer){
          document.write("<span> Ответ: " + questionObject.answer + "</span>");
       }else{
          document.write("<span style='color: red' class='incorrect'> Ответ: " + questionObject.answer + "</span>");
       }
+      
       totalAnswers++
       document.write("<br>");
       
