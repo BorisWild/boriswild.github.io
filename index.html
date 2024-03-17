@@ -80,7 +80,7 @@
 
    
   function showPreviousQuestions() {
-    let totalAnswers=1;
+    let totalAnswers;
     
     for (var i = 0; i < localStorage.length-1; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
@@ -89,7 +89,7 @@
          break;
       }
       
-      document.write("<span>" + (totalAnswers) + ". " + questionObject.question + "</span>");
+      document.write("<span>" + (totalAnswers+1) + ". " + questionObject.question + "</span>");
       
       let [question, answer] = questionObject.question.split('=');
            
