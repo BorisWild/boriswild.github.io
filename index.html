@@ -1,15 +1,27 @@
-<html>
-  <head><meta name="viewport" content="width=device-width"></head>
-  <style>
-    .styles_video__SWbZL {
-      width: 500px;
-      height: 300px;
-    }
-  </style>
-  <body>
-   <video class="styles_video__SWbZL" preload="metadata" autoplay muted playsinline controls controlslist="nodownload">
-     <source src="https://api.true-school.dev-2-tech.ru/storage/private/video/welcomemp4-zbrzoywjnmfktbi8wflmfulqqm0quz1nzxilzryam4v_271Mws3JWpO7RkD7HcNpJcMGP6dbVFsVPGvycxVP.mp4?expires=1710613206&amp;signature=c1b1ede40294ee97b73b47e9758199a981fa1e0cbfbe681e92911986e22871be" type="video/mp4" />
-   </video>
-    <img src="https://kupitrip-static.s3.eu-central-1.amazonaws.com/kupitrip_logo_cernyj_novyj_2__.png">
-  </body>
+<!DOCTYPE html> 
+<html> <head> <title>Multiplication Table</title> </head> 
+  <body> <h2>Multiplication Table</h2> 
+    <script> 
+      function generateMultiplicationTable() { 
+        var num1 = Math.floor(Math.random() * 10) + 1; 
+        var num2 = Math.floor(Math.random() * 10) + 1; 
+        var correctAnswer = num1 * num2; document.write("<p>What is " + num1 + " x " + num2 + "?</p>"); 
+        var answers = [correctAnswer, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]; 
+        answers.sort(() => Math.random() - 0.5); 
+        for (var i = 0; i < answers.length; i++) { 
+          document.write("<button onclick='checkAnswer(" + answers[i] + "," + correctAnswer + ")'>" + answers[i] + "</button>"); 
+        } 
+      } 
+      function checkAnswer(selectedAnswer, correctAnswer) { 
+        if (selectedAnswer === correctAnswer) { 
+          alert("Correct answer!"); 
+        } else { 
+          alert("Incorrect answer. Please try again."); 
+        } 
+        location.reload(); 
+      } 
+      
+      generateMultiplicationTable(); 
+    </script> 
+  </body> 
 </html>
