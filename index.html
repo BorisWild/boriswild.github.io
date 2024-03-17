@@ -88,7 +88,7 @@
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
       
       if(!questionObject?.answer){
-         break;
+         continue;
       }
       
       document.write("<span>" + (totalAnswers+1) + ". " + questionObject.question + "</span>");
