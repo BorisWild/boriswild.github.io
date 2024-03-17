@@ -58,7 +58,7 @@
     }
     const historyObj = JSON.parse(localStorage.getItem("question_" + (localStorage.length-1)));
     
-    localStorage.removeItem=("question_" + (localStorage.length-1));
+    localStorage.removeItem("question_" + (localStorage.length-1));
     
     historyObj.answer = answerBtn.textContent;
     
