@@ -50,8 +50,8 @@
     } else {
       answerBtn.classList.add("incorrect");
     }
-    const historyObj = localStorage.getItem("question_" + localStorage.length-1);
-    
+    const historyObj = localStorage.getItem("question_" + (localStorage.length-1));
+    console.log(historyObj, )
     historyObj.answer = answerBtn.innerHtml;
     
     localStorage.setItem("question_" + localStorage.length, JSON.stringify(historyObj));
