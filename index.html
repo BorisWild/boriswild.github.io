@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Multiplication Table</title>
+  <title>Таблица Умножения</title>
 </head>
 <body>
 
@@ -13,6 +13,10 @@
   }
    .incorrect {
     color: green;
+  }
+
+  button {
+    margin: 10px;
   }
 </style>
 
@@ -54,7 +58,7 @@
     
     localStorage.removeItem=("question_" + (localStorage.length-1));
     
-    historyObj.answer = answerBtn.innerHtml;
+    historyObj.answer = answerBtn.textContent;
     
     console.log(historyObj)
     
@@ -85,7 +89,7 @@
   generateMultiplicationTable();
 </script>
 
-<button onclick="showPreviousQuestions()">Show Previous Questions</button>
+<button onclick="showPreviousQuestions()" style={margin-top:100px}>Ответы</button>
 
 </body>
 </html>
