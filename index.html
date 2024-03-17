@@ -1,27 +1,74 @@
-<html> 
-  <head> <title>Multiplication Table</title> </head> 
-  <body> <h2>Multiplication Table:</h2> 
-    <script> 
-      function generateMultiplicationTable() { 
-        var num1 = Math.floor(Math.random() * 10) + 1; 
-        var num2 = Math.floor(Math.random() * 10) + 1; 
-        var correctAnswer = num1 * num2; document.write("<p>What is " + num1 + " x " + num2 + "?</p>"); 
-        var answers = [correctAnswer, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]; 
-        answers.sort(() => Math.random() - 0.5); 
-        for (var i = 0; i < answers.length; i++) { 
-          document.write("<button onclick='checkAnswer(" + answers[i] + "," + correctAnswer + ")'>" + answers[i] + "</button>"); 
-        } 
-      } 
-      function checkAnswer(selectedAnswer, correctAnswer) { 
-        if (selectedAnswer === correctAnswer) { 
-          alert("Correct answer!"); 
-        } else { 
-          alert("Incorrect answer. Please try again."); 
-        } 
-        location.reload(); 
-      } 
-      
-      generateMultiplicationTable(); 
-    </script> 
-  </body> 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiplication Table</title>
+</head>
+<body>
+
+<h2>Multiplication Table</h2>
+
+<style>
+  .incorrect {
+    color: red;
+  }
+</style>
+
+<script>
+  function generateMultiplicationTable() {
+    var num1 = Math.floor(Math.random() * 10) + 1;
+    var num2 = Math.floor(Math.random() * 10) + 1;
+    var correctAnswer = num1 * num2;
+
+    var question = num1 + " x " + num2 + " = " + correctAnswer;
+    
+    var answers = [correctAnswer, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)];
+    answers.sort(() => Math.random() - 0.5);
+
+    var questionObject = {
+      question: question,
+      answers: answers
+    };
+
+    localStorage.setItem("question_" + localStorage.length, JSON.stringify(questionObject));
+    
+    document.write("<p>What is " + num1 + " x " + num2 + "?</p>");
+
+    for (var i = 0; i < answers.length; i++) {
+      document.write("<button onclick='checkAnswer(" + answers[i] + "," + correctAnswer + "," + i + ")'>" + answers[i] + "</button>");
+    }
+  }
+
+  function checkAnswer(selectedAnswer, correctAnswer, index) {
+    if (selectedAnswer === correctAnswer) {
+      alert("Correct answer!");
+    } else {
+      alert("Incorrect answer. Please try again.");
+      document.getElementsByTagName("button")[index].classList.add("incorrect");
+    }
+    location.reload();
+  }
+
+  function showPreviousQuestions() {
+    for (var i = 0; i < localStorage.length; i++) {
+      var questionObject = JSON.parse(localStorage.getItem("question_" + i));
+      document.write("<p>" + questionObject.question + "</p>");
+      document.write("<p>Answers: ");
+      for (var j = 0; j < questionObject.answers.length; j++) {
+        if (questionObject.answers[j] === JSON.parse(localStorage.getItem("question_" + i)).answers[0]) {
+          document.write("<span>" + questionObject.answers[j] + "</span>");
+        } else {
+          document.write("<span class='incorrect'>" + questionObject.answers[j] + "</span>");
+        }
+        if (j !== questionObject.answers.length - 1) {
+          document.write(", ");
+        }
+      }
+      document.write("</p><br>");
+    }
+  }
+</script>
+
+<button onclick="showPreviousQuestions()">Show Previous Questions</button>
+
+</body>
 </html>
