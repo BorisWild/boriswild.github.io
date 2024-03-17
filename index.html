@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Таблица Умножения</title>
-</head>
 <body>
 
 <h2>Multiplication Table</h2>
@@ -67,22 +64,19 @@
     //location.reload();
   }
 
+   
   function showPreviousQuestions() {
     for (var i = 0; i < localStorage.length; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
-      document.write("<p>" + questionObject.question + "</p>");
-      document.write("<p>Answers: ");
-      for (var j = 0; j < questionObject.answers.length; j++) {
-        if (questionObject.answers[j] === JSON.parse(localStorage.getItem("question_" + i)).answers[0]) {
-          document.write("<span>" + questionObject.answers[j] + "</span>");
-        } else {
-          document.write("<span class='incorrect'>" + questionObject.answers[j] + "</span>");
-        }
-        if (j !== questionObject.answers.length - 1) {
-          document.write(", ");
-        }
-      }
-      document.write("</p><br>");
+      document.write("<span>" + questionObject.question + "</span>");
+      const [question, answer] = questionObject.question.split('=');
+   if(answer==questionObject.answer){
+      document.write("<span> Ответ: " + questionObject.answer + "</span>");
+   }else{
+     document.write("<span  class='incorrect'> Ответ: " + questionObject.answer + "</span>");
+   }
+      document.write("<br>");
+      
     }
   }
 
