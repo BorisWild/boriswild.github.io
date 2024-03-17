@@ -71,7 +71,7 @@
 
    
   function showPreviousQuestions() {
-    for (var i = 0; i < localStorage.length; i++) {
+    for (var i = 0; i < localStorage.length-1; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
       document.write("<span>" + questionObject.question + "</span>");
       let [question, answer] = questionObject.question.split('=');
@@ -80,12 +80,13 @@
       if(Number(answer)===questionObject?.answer){
          document.write("<span> Ответ: " + questionObject.answer + "</span>");
       }else{
-         document.write("<span style='color: red'> Ответ: " + questionObject.answer + "</span>");
+         document.write("<span style='color: red' class='incorrect'> Ответ: " + questionObject.answer + "</span>");
       }
       document.write("<br>");
       
     }
-
+    document.write("<p>Всего вопросов: "+(localStorage.length-1)+" шт</p>");
+    document.write("<p>Ошибок: "+document.querySellectorAll('incorrect')+" шт</p>");
     document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>");
   }
 
