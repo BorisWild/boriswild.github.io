@@ -75,20 +75,24 @@
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
       document.write("<span>" + questionObject.question + "</span>");
       const [question, answer] = questionObject.question.split('=');
-   if(answer==questionObject.answer){
-      document.write("<span> Ответ: " + questionObject.answer + "</span>");
-   }else{
-     document.write("<span  class='incorrect'> Ответ: " + questionObject.answer + "</span>");
-   }
+   
+      if(answer==questionObject.answer){
+         document.write("<span> Ответ: " + questionObject.answer + "</span>");
+      }else{
+         document.write("<span  class='incorrect'> Ответ: " + questionObject.answer + "</span>");
+      }
       document.write("<br>");
       
     }
+
+    document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>
   }
 
   generateMultiplicationTable();
 </script>
 
-<button onclick="showPreviousQuestions()" style={margin-top:100px}>Ответы</button>
+<br>
+<button onclick="showPreviousQuestions()" style="margin-top:100px">Ответы</button>
 
 </body>
 </html>
