@@ -82,6 +82,8 @@
 
    
   function showPreviousQuestions() {
+    document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>");
+    
     let totalAnswers=0;
     
     for (var i = 0; i < localStorage.length-1; i++) {
