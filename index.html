@@ -31,7 +31,7 @@
 
     localStorage.setItem("question_" + localStorage.length, JSON.stringify(questionObject));
     
-    document.write("<p>What is " + num1 + " x " + num2 + "?</p>");
+    document.write("<p>Сколько " + num1 + " x " + num2 + "?</p>");
 
     for (var i = 0; i < answers.length; i++) {
       document.write("<button onclick='checkAnswer(" + answers[i] + "," + correctAnswer + "," + i + ")'>" + answers[i] + "</button>");
@@ -39,12 +39,20 @@
   }
 
   function checkAnswer(selectedAnswer, correctAnswer, index) {
+    const answerBtn = document.getElementsByTagName("button")[index];
+    console.log(answerBtn);
+    
     if (selectedAnswer === correctAnswer) {
-      alert("Correct answer!");
+      answerBtn.classList.add("correct");
     } else {
-      alert("Incorrect answer. Please try again.");
-      document.getElementsByTagName("button")[index].classList.add("incorrect");
+      answerBtn.classList.add("incorrect");
     }
+    const historyObj = localStorage.getItem("question_" + localStorage.length);
+    
+    historyObj.answer = answerBtn.innerHtml;
+    
+    localStorage.setItem("question_" + localStorage.length, JSON.stringify(historyObj));
+    
     location.reload();
   }
 
