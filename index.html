@@ -73,7 +73,7 @@
   function showPreviousQuestions() {
     for (var i = 0; i < localStorage.length-1; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
-      document.write("<span>" + questionObject.question + "</span>");
+      document.write("<span>" + i + ". " + questionObject.question + "</span>");
       let [question, answer] = questionObject.question.split('=');
 
            
@@ -85,8 +85,9 @@
       document.write("<br>");
       
     }
-    document.write("<span>Всего вопросов: "+(localStorage.length-1)+" шт</span><br>");
-    document.write("<span>Ошибок: "+document.querySelectorAll('incorrect').length+" шт</span>");
+    
+    document.write("<br><span>Всего вопросов: "+(localStorage.length-1)+" шт</span>");
+    document.write("<span>Ошибок: "+document.querySelectorAll('.incorrect').length+" шт</span><br>");
     
     document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>");
   }
