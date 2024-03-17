@@ -49,7 +49,7 @@
 
   function checkAnswer(selectedAnswer, correctAnswer, index) {
     const answerBtn = document.getElementsByTagName("button")[index];
-    
+    console.log(selectedAnswer, correctAnswer, index);
     
     if (selectedAnswer === correctAnswer) {
       answerBtn.classList.add("correct");
@@ -73,7 +73,7 @@
   function showPreviousQuestions() {
     for (var i = 0; i < localStorage.length-1; i++) {
       var questionObject = JSON.parse(localStorage.getItem("question_" + i));
-      document.write("<span>" + i + ". " + questionObject.question + "</span>");
+      document.write("<span>" + (i+1) + ". " + questionObject.question + "</span>");
       let [question, answer] = questionObject.question.split('=');
 
            
@@ -87,9 +87,10 @@
     }
     
     document.write("<br><span>Всего вопросов: "+(localStorage.length-1)+" шт</span>");
-    document.write("<span>Ошибок: "+document.querySelectorAll('.incorrect').length+" шт</span><br>");
+    document.write("<br><span>Ошибок: "+document.querySelectorAll('.incorrect').length+" шт</span><br>");
     
     document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>");
+    
   }
 
   generateMultiplicationTable();
