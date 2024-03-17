@@ -85,8 +85,9 @@
       document.write("<br>");
       
     }
-    document.write("<p>Всего вопросов: "+(localStorage.length-1)+" шт</p>");
-    document.write("<p>Ошибок: "+document.querySellectorAll('incorrect')+" шт</p>");
+    document.write("<span>Всего вопросов: "+(localStorage.length-1)+" шт</span><br>");
+    document.write("<span>Ошибок: "+document.querySelectorAll('incorrect').length+" шт</span>");
+    
     document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>");
   }
 
