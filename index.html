@@ -1,129 +1,97 @@
 <!DOCTYPE html>
-<html>
-  <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
-  <head>
-    <title>Таблица Умножения</title>
-    <style>
-      body{
-       max-width:400px;
-      }
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TronLinkAdapter Test Demo</title>
+        <script src="../node_modules/@tronweb3/tronwallet-adapter-tronlink/lib/umd/index.js"></script>
+    </head>
+    <body>
+        <div id="root">
+            <button id="connectBtn">connect</button>
+            <button id="disconnectBtn">disconnect</button>
+            <button id="signMessageBtn">signMessage</button>
+            <button id="signTransactionBtn">signTransaction</button>
+        </div>
+        <script>
+            const log = function (...args) {
+                console.log('Adapter:', ...args);
+            };
+            let address;
+            const receiver = 'TMDKznuDWaZwfZHcM61FVFstyYNmK6Njk1';
+            const { TronLinkAdapter } = window['@tronweb3/tronwallet-adapter-tronlink'];
+            const adapter = new TronLinkAdapter({
+                openTronLinkAppOnMobile: true,
+                openUrlWhenWalletNotFound: false,
+                checkTimeout: 3000,
+            });
 
-      .incorrect {
-        border-color: red;
-        color: red;
-      }
-      
-      .correct {
-        border-color: green;
-        color: green;
-      }
-    
-      button {
-        width:100px;
-        height:100px;
-        margin: 10px;
-      }
-    </style>
-  </head>
-<body>
+            adapter.on('readyStateChanged', () => {
+                log('readyState: ', adapter.readyState);
+            });
+            adapter.on('connect', () => {
+                log('connect2222: ', adapter.address);
+                address = adapter.address;
+                adapter
+                    .network()
+                    .then((res) => {
+                        log(res);
+                    })
+                    .catch((e) => {
+                        log(e);
+                    });
+            });
+            adapter.on('stateChanged', (state) => {
+                log('stateChanged: ', state);
+            });
+            adapter.on('accountsChanged', (data, preaddr) => {
+                log('accountsChanged: current', data, ' pre: ', preaddr);
+            });
 
+            adapter.on('chainChanged', (data) => {
+                log('chainChanged: ', data);
+            });
 
-</style>
+            adapter.on('disconnect', () => {
+                log('disconnect');
+            });
 
-<script>
-  function generateMultiplicationTable() {
-    var num1 = Math.floor(Math.random() * 10) + 1;
-    var num2 = Math.floor(Math.random() * 10) + 1;
-    
-    var correctAnswer = num1 * num2;
+            const connectBtn = document.querySelector('#connectBtn');
+            const disconnectBtn = document.querySelector('#disconnectBtn');
+            const signMessageBtn = document.querySelector('#signMessageBtn');
+            const signTransactionBtn = document.querySelector('#signTransactionBtn');
 
-    var question = num1 + " x " + num2 + " = " + correctAnswer;
-    
-    var answers = [correctAnswer, Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)];
-    answers.sort(() => Math.random() - 0.5);
+            connectBtn.addEventListener('click', onConnect);
+            disconnectBtn.addEventListener('click', onDisconnect);
+            signMessageBtn.addEventListener('click', onSignMessage);
+            signTransactionBtn.addEventListener('click', onSignTransaction);
 
-    var questionObject = {
-      question: question,
-      answers: answers
-    };
+            async function onConnect() {
+                const res = await adapter.connect();
+                log('connect successfully: ', adapter.address);
+                address = adapter.address;
+            }
 
-    localStorage.setItem("question_" + localStorage.length, JSON.stringify(questionObject));
-    
-    document.write("<p style='text-align:center'>Сколько <b>" + num1 + "</b> x <b>" + num2 + "</b>?</p>");
+            async function onDisconnect() {
+                await adapter.disconnect();
+                log('disconnect successfully ');
+                address = undefined;
+            }
 
-    for (var i = 0; i < answers.length; i++) {
-      document.write("<button onclick='checkAnswer(" + answers[i] + "," + correctAnswer + "," + i + ")'>" + answers[i] + "</button>");
-    }
-  }
+            async function onSignMessage() {
+                const m = 'Hello world';
+                const res = await adapter.signMessage(m);
+                log('sign message successfully: ', res);
+                const address = await tronWeb.trx.verifyMessageV2(m, res);
+                log('verify successfully');
+            }
 
-  function checkAnswer(selectedAnswer, correctAnswer, index) {
-    const answerBtn = document.getElementsByTagName("button")[index];
-    console.log(selectedAnswer, correctAnswer, index);
-    
-    if (selectedAnswer === correctAnswer) {
-      answerBtn.classList.add("correct");
-    } else {
-      answerBtn.classList.add("incorrect");
-    }
-    const historyObj = JSON.parse(localStorage.getItem("question_" + (localStorage.length-1)));
-    
-    localStorage.removeItem("question_" + (localStorage.length-1));
-    
-    historyObj.answer = Number(answerBtn.textContent);
-    
-    
-    
-    localStorage.setItem("question_" + localStorage.length, JSON.stringify(historyObj));
-    
-    sleep(400).then(() => {
-      location.reload();
-    });
-  }
-
-   
-  function showPreviousQuestions() {
-    document.write("<button onclick='location.reload()'>Назад</button><br><br>");
-    
-    let totalAnswers=0;
-    
-    for (var i = 0; i < localStorage.length-1; i++) {
-      var questionObject = JSON.parse(localStorage.getItem("question_" + i));
-      
-      if(!questionObject?.answer){
-         continue;
-      }
-      
-      document.write("<span>" + (totalAnswers+1) + ". " + questionObject.question + "</span>");
-      
-      let [question, answer] = questionObject.question.split('=');
-           
-      if(Number(answer)===questionObject?.answer){
-         document.write("<span> Ответ: " + questionObject.answer + "</span>");
-      }else{
-         document.write("<span style='color: red' class='incorrect'> Ответ: " + questionObject.answer + "</span>");
-      }
-      
-      totalAnswers++
-      document.write("<br>");
-      
-    }
-    
-    document.write("<br><span>Всего вопросов: "+totalAnswers+" шт</span>");
-    document.write("<br><span>Ошибок: "+document.querySelectorAll('.incorrect').length+" шт</span><br>");
-    
-    document.write("<button onclick='location.reload()' style='margin-top:100px'>Назад</button>");
-    
-  }
-
-  function sleep (time) {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  }
-  
-  generateMultiplicationTable();
-</script>
-
-<br>
-<button onclick="showPreviousQuestions()" style="margin-top:100px">Ответы</button>
-
-</body>
+            async function onSignTransaction() {
+                const transaction = await tronWeb.transactionBuilder.sendTrx(receiver, tronWeb.toSun(0.000001), adapter.address);
+                const signedTransaction = await adapter.signTransaction(transaction);
+                const res = await tronWeb.trx.sendRawTransaction(signedTransaction);
+                log('send successfully.');
+            }
+        </script>
+    </body>
 </html>
