@@ -1,1 +1,312 @@
-<a href="https://t.me/delaemIT_bot?start=task_name">Bot</a>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Шифрование/Дешифрование</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .result-block {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #eee;
+            margin-right: 5px;
+            border-radius: 4px 4px 0 0;
+        }
+        .tab.active {
+            background: #4CAF50;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .copy-btn {
+            background-color: #2196F3;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>RSA Шифрование/Дешифрование</h1>
+    
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('generate')">Генерация ключей</div>
+        <div class="tab" onclick="switchTab('encrypt')">Шифрование</div>
+        <div class="tab" onclick="switchTab('decrypt')">Дешифрование</div>
+    </div>
+    
+    <!-- Вкладка генерации ключей -->
+    <div id="generate-tab" class="tab-content active">
+        <h2>Генерация RSA ключей</h2>
+        <button onclick="generateKeyPair()">Сгенерировать новую пару ключей</button>
+        
+        <div id="keyResults" style="margin-top: 20px;">
+            <label for="privateKey">Приватный ключ:</label>
+            <button class="copy-btn" onclick="copyToClipboard('privateKey')">Копировать</button>
+            <textarea id="privateKey" rows="8" readonly></textarea>
+            
+            <label for="publicKeyGenerated">Публичный ключ:</label>
+            <button class="copy-btn" onclick="copyToClipboard('publicKeyGenerated')">Копировать</button>
+            <textarea id="publicKeyGenerated" rows="6" readonly></textarea>
+        </div>
+    </div>
+    
+    <!-- Вкладка шифрования -->
+    <div id="encrypt-tab" class="tab-content">
+        <h2>Шифрование сообщения</h2>
+        <form id="encryptForm">
+            <label for="publicKey">Публичный ключ (PEM формат):</label>
+            <textarea id="publicKey" rows="6" required placeholder="-----BEGIN PUBLIC KEY-----..."></textarea>
+
+            <label for="message">Сообщение для шифрования:</label>
+            <textarea id="message" rows="4" required></textarea>
+
+            <button type="submit">Зашифровать</button>
+        </form>
+
+        <div id="encryptResult" class="result-block" style="display: none;">
+            <h3>Результат шифрования (Base64):</h3>
+            <div id="encryptedOutput"></div>
+            <button class="copy-btn" onclick="copyToClipboard('encryptedOutput')">Копировать</button>
+        </div>
+    </div>
+    
+    <!-- Вкладка дешифрования -->
+    <div id="decrypt-tab" class="tab-content">
+        <h2>Дешифрование сообщения</h2>
+        <form id="decryptForm">
+            <label for="privateKeyDecrypt">Приватный ключ (PEM формат):</label>
+            <textarea id="privateKeyDecrypt" rows="8" required placeholder="-----BEGIN PRIVATE KEY-----..."></textarea>
+
+            <label for="encryptedMessage">Зашифрованное сообщение (Base64):</label>
+            <textarea id="encryptedMessage" rows="6" required></textarea>
+
+            <button type="submit">Дешифровать</button>
+        </form>
+
+        <div id="decryptResult" class="result-block" style="display: none;">
+            <h3>Результат дешифрования:</h3>
+            <div id="decryptedOutput"></div>
+            <button class="copy-btn" onclick="copyToClipboard('decryptedOutput')">Копировать</button>
+        </div>
+    </div>
+
+    <script>
+        // Переключение между вкладками
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Копирование текста в буфер обмена
+        function copyToClipboard(elementId) {
+            const textarea = document.getElementById(elementId);
+            textarea.select();
+            document.execCommand('copy');
+            alert('Скопировано в буфер обмена!');
+        }
+
+        // Генерация новой пары ключей
+        async function generateKeyPair() {
+            try {
+                const keyPair = await window.crypto.subtle.generateKey(
+                    {
+                        name: "RSA-OAEP",
+                        modulusLength: 2048,
+                        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+                        hash: "SHA-256",
+                    },
+                    true,
+                    ["encrypt", "decrypt"]
+                );
+
+                // Экспорт приватного ключа
+                const privateKeyPem = await exportPrivateKey(keyPair.privateKey);
+                document.getElementById('privateKey').value = privateKeyPem;
+                document.getElementById('privateKeyDecrypt').value = privateKeyPem;
+                
+                // Экспорт публичного ключа
+                const publicKeyPem = await exportPublicKey(keyPair.publicKey);
+                document.getElementById('publicKeyGenerated').value = publicKeyPem;
+                document.getElementById('publicKey').value = publicKeyPem;
+                
+            } catch (error) {
+                alert('Ошибка генерации ключей: ' + error.message);
+                console.error(error);
+            }
+        }
+
+        // Экспорт приватного ключа в PEM формате
+        async function exportPrivateKey(key) {
+            const exported = await window.crypto.subtle.exportKey("pkcs8", key);
+            return `-----BEGIN PRIVATE KEY-----\n${formatPem(btoa(String.fromCharCode(...new Uint8Array(exported))))}\n-----END PRIVATE KEY-----`;
+        }
+
+        // Экспорт публичного ключа в PEM формате
+        async function exportPublicKey(key) {
+            const exported = await window.crypto.subtle.exportKey("spki", key);
+            return `-----BEGIN PUBLIC KEY-----\n${formatPem(btoa(String.fromCharCode(...new Uint8Array(exported))))}\n-----END PUBLIC KEY-----`;
+        }
+
+        // Форматирование PEM (разбивка на строки по 64 символа)
+        function formatPem(str) {
+            return str.match(/.{1,64}/g).join('\n');
+        }
+
+        // Шифрование сообщения
+        document.getElementById('encryptForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const publicKeyPem = document.getElementById('publicKey').value.trim();
+            const message = document.getElementById('message').value;
+            
+            try {
+                const publicKey = await importPublicKey(publicKeyPem);
+                const encrypted = await encryptMessage(publicKey, message);
+                
+                document.getElementById('encryptedOutput').textContent = encrypted;
+                document.getElementById('encryptResult').style.display = 'block';
+            } catch (error) {
+                alert('Ошибка шифрования: ' + error.message);
+                console.error(error);
+            }
+        });
+
+        // Дешифрование сообщения
+        document.getElementById('decryptForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const privateKeyPem = document.getElementById('privateKeyDecrypt').value.trim();
+            const encryptedMessage = document.getElementById('encryptedMessage').value.trim();
+            
+            try {
+                const privateKey = await importPrivateKey(privateKeyPem);
+                const decrypted = await decryptMessage(privateKey, encryptedMessage);
+                
+                document.getElementById('decryptedOutput').textContent = decrypted;
+                document.getElementById('decryptResult').style.display = 'block';
+            } catch (error) {
+                alert('Ошибка дешифрования: ' + error.message);
+                console.error(error);
+            }
+        });
+
+        // Импорт публичного ключа
+        async function importPublicKey(pem) {
+            const pemHeader = '-----BEGIN PUBLIC KEY-----';
+            const pemFooter = '-----END PUBLIC KEY-----';
+            const pemContents = pem
+                .replace(pemHeader, '')
+                .replace(pemFooter, '')
+                .replace(/\s+/g, '');
+            
+            const binaryDer = Uint8Array.from(atob(pemContents), c => c.charCodeAt(0));
+            
+            return await window.crypto.subtle.importKey(
+                'spki',
+                binaryDer,
+                {
+                    name: 'RSA-OAEP',
+                    hash: 'SHA-256'
+                },
+                true,
+                ['encrypt']
+            );
+        }
+
+        // Импорт приватного ключа
+        async function importPrivateKey(pem) {
+            const pemHeader = '-----BEGIN PRIVATE KEY-----';
+            const pemFooter = '-----END PRIVATE KEY-----';
+            const pemContents = pem
+                .replace(pemHeader, '')
+                .replace(pemFooter, '')
+                .replace(/\s+/g, '');
+            
+            const binaryDer = Uint8Array.from(atob(pemContents), c => c.charCodeAt(0));
+            
+            return await window.crypto.subtle.importKey(
+                'pkcs8',
+                binaryDer,
+                {
+                    name: 'RSA-OAEP',
+                    hash: 'SHA-256'
+                },
+                true,
+                ['decrypt']
+            );
+        }
+
+        // Шифрование сообщения
+        async function encryptMessage(publicKey, message) {
+            const encoder = new TextEncoder();
+            const encoded = encoder.encode(message);
+            
+            const encrypted = await window.crypto.subtle.encrypt(
+                {
+                    name: 'RSA-OAEP'
+                },
+                publicKey,
+                encoded
+            );
+            
+            return btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+        }
+
+        // Дешифрование сообщения
+        async function decryptMessage(privateKey, encryptedBase64) {
+            const encryptedData = Uint8Array.from(atob(encryptedBase64), c => c.charCodeAt(0));
+            
+            const decrypted = await window.crypto.subtle.decrypt(
+                {
+                    name: 'RSA-OAEP'
+                },
+                privateKey,
+                encryptedData
+            );
+            
+            const decoder = new TextDecoder();
+            return decoder.decode(decrypted);
+        }
+    </script>
+</body>
+</html>
