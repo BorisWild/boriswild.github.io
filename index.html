@@ -170,6 +170,9 @@
                 <label for="iv">IV (если использовался):</label>
                 <input type="text" id="iv">
 
+                <label for="auth-tag">AuthTag:</label>
+                <input type="text" id="auth-tag">
+
                 <button type="submit">Дешифровать ключ</button>
             </form>
 
@@ -364,6 +367,7 @@
                 document.getElementById('encryptedPrivateKey').value = encryptedBase64;
                 document.getElementById('salt').value = saltBase64;
                 document.getElementById('iv').value = ivBase64;
+                document.getElementById('auth-tag').value = authTagBase64;
                 
             } catch (error) {
                 alert('Ошибка шифрования ключа: ' + error.message);
@@ -379,12 +383,19 @@
             const password = document.getElementById('decryptPassword').value;
             const saltBase64 = document.getElementById('salt').value.trim();
             const ivBase64 = document.getElementById('iv').value.trim();
+            const authTagBase64 = document.getElementById('auth-tag').value.trim();
             
             try {
                 // Конвертируем из Base64
                 const encryptedData = Uint8Array.from(atob(encryptedKey), c => c.charCodeAt(0));
                 const salt = saltBase64 ? Uint8Array.from(atob(saltBase64), c => c.charCodeAt(0)) : new Uint8Array(16);
                 const iv = ivBase64 ? Uint8Array.from(atob(ivBase64), c => c.charCodeAt(0)) : new Uint8Array(12);
+                const authTag = Uint8Array.from(atob(authTagBase64), c => c.charCodeAt(0));
+
+                 // Объединяем ciphertext и auth tag (для Web Crypto API)
+                const encryptedData = new Uint8Array(ciphertext.length + authTag.length);
+                encryptedData.set(ciphertext);
+                encryptedData.set(authTag, ciphertext.length);
                 
                 // Создаем ключ из пароля
                 const keyMaterial = await window.crypto.subtle.importKey(
@@ -412,7 +423,8 @@
                 const decrypted = await window.crypto.subtle.decrypt(
                     {
                         name: 'AES-GCM',
-                        iv: iv
+                        iv: iv,
+                        tagLength: 128
                     },
                     key,
                     encryptedData
