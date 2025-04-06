@@ -38,6 +38,7 @@
         .tabs {
             display: flex;
             margin-bottom: 20px;
+            overflow-x: auto;
         }
         .tab {
             padding: 10px 20px;
@@ -45,6 +46,7 @@
             background: #eee;
             margin-right: 5px;
             border-radius: 4px 4px 0 0;
+            white-space: nowrap;
         }
         .tab.active {
             background: #4CAF50;
@@ -69,6 +71,7 @@
         <div class="tab active" onclick="switchTab('generate')">Генерация ключей</div>
         <div class="tab" onclick="switchTab('encrypt')">Шифрование</div>
         <div class="tab" onclick="switchTab('decrypt')">Дешифрование</div>
+        <div class="tab" onclick="switchTab('protect')">Защита ключа</div>
     </div>
     
     <!-- Вкладка генерации ключей -->
@@ -126,6 +129,57 @@
             <button class="copy-btn" onclick="copyToClipboard('decryptedOutput')">Копировать</button>
         </div>
     </div>
+    
+    <!-- Новая вкладка для защиты ключа -->
+    <div id="protect-tab" class="tab-content">
+        <h2>Защита приватного ключа паролем</h2>
+        <form id="protectForm">
+            <label for="privateKeyToProtect">Приватный ключ для защиты:</label>
+            <textarea id="privateKeyToProtect" rows="8" required placeholder="-----BEGIN PRIVATE KEY-----..."></textarea>
+            
+            <label for="protectionPassword">Пароль:</label>
+            <input type="password" id="protectionPassword" required>
+            
+            <label for="confirmPassword">Подтвердите пароль:</label>
+            <input type="password" id="confirmPassword" required>
+
+            <button type="submit">Зашифровать ключ</button>
+        </form>
+
+        <div id="protectionResult" class="result-block" style="display: none;">
+            <h3>Зашифрованный приватный ключ:</h3>
+            <div id="protectedKeyOutput"></div>
+            <button class="copy-btn" onclick="copyToClipboard('protectedKeyOutput')">Копировать</button>
+            
+            <h3 style="margin-top: 20px;">Параметры для дешифровки:</h3>
+            <div id="decryptionParams"></div>
+        </div>
+        
+        <div id="decryptKeySection" style="margin-top: 30px; display: none;">
+            <h2>Дешифровка ключа</h2>
+            <form id="decryptKeyForm">
+                <label for="encryptedPrivateKey">Зашифрованный приватный ключ:</label>
+                <textarea id="encryptedPrivateKey" rows="8" required></textarea>
+                
+                <label for="decryptPassword">Пароль:</label>
+                <input type="password" id="decryptPassword" required>
+                
+                <label for="salt">Соль (если использовалась):</label>
+                <input type="text" id="salt">
+                
+                <label for="iv">IV (если использовался):</label>
+                <input type="text" id="iv">
+
+                <button type="submit">Дешифровать ключ</button>
+            </form>
+
+            <div id="decryptKeyResult" class="result-block" style="display: none;">
+                <h3>Дешифрованный приватный ключ:</h3>
+                <div id="decryptedKeyOutput"></div>
+                <button class="copy-btn" onclick="copyToClipboard('decryptedKeyOutput')">Копировать</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Переключение между вкладками
@@ -135,6 +189,10 @@
             
             document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
             document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            if (tabName === 'protect') {
+                document.getElementById('decryptKeySection').style.display = 'block';
+            }
         }
 
         // Копирование текста в буфер обмена
@@ -163,6 +221,7 @@
                 const privateKeyPem = await exportPrivateKey(keyPair.privateKey);
                 document.getElementById('privateKey').value = privateKeyPem;
                 document.getElementById('privateKeyDecrypt').value = privateKeyPem;
+                document.getElementById('privateKeyToProtect').value = privateKeyPem;
                 
                 // Экспорт публичного ключа
                 const publicKeyPem = await exportPublicKey(keyPair.publicKey);
@@ -226,6 +285,139 @@
                 document.getElementById('decryptResult').style.display = 'block';
             } catch (error) {
                 alert('Ошибка дешифрования: ' + error.message);
+                console.error(error);
+            }
+        });
+
+        // Защита приватного ключа паролем
+        document.getElementById('protectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const privateKeyPem = document.getElementById('privateKeyToProtect').value.trim();
+            const password = document.getElementById('protectionPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+            
+            try {
+                // Генерируем соль и IV
+                const salt = window.crypto.getRandomValues(new Uint8Array(16));
+                const iv = window.crypto.getRandomValues(new Uint8Array(12));
+                
+                // Создаем ключ из пароля
+                const keyMaterial = await window.crypto.subtle.importKey(
+                    'raw',
+                    new TextEncoder().encode(password),
+                    { name: 'PBKDF2' },
+                    false,
+                    ['deriveBits', 'deriveKey']
+                );
+                
+                const key = await window.crypto.subtle.deriveKey(
+                    {
+                        name: 'PBKDF2',
+                        salt: salt,
+                        iterations: 100000,
+                        hash: 'SHA-256'
+                    },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['encrypt']
+                );
+                
+                // Шифруем приватный ключ
+                const encrypted = await window.crypto.subtle.encrypt(
+                    {
+                        name: 'AES-GCM',
+                        iv: iv
+                    },
+                    key,
+                    new TextEncoder().encode(privateKeyPem)
+                );
+                
+                // Конвертируем в Base64
+                const encryptedBase64 = btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+                const saltBase64 = btoa(String.fromCharCode(...salt));
+                const ivBase64 = btoa(String.fromCharCode(...iv));
+                
+                // Показываем результат
+                document.getElementById('protectedKeyOutput').textContent = encryptedBase64;
+                document.getElementById('decryptionParams').innerHTML = `
+                    <p><strong>Соль:</strong> ${saltBase64}</p>
+                    <p><strong>IV:</strong> ${ivBase64}</p>
+                    <p><strong>Алгоритм:</strong> AES-GCM с PBKDF2</p>
+                `;
+                document.getElementById('protectionResult').style.display = 'block';
+                
+                // Заполняем поля для дешифровки
+                document.getElementById('encryptedPrivateKey').value = encryptedBase64;
+                document.getElementById('salt').value = saltBase64;
+                document.getElementById('iv').value = ivBase64;
+                
+            } catch (error) {
+                alert('Ошибка шифрования ключа: ' + error.message);
+                console.error(error);
+            }
+        });
+
+        // Дешифровка приватного ключа
+        document.getElementById('decryptKeyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const encryptedKey = document.getElementById('encryptedPrivateKey').value.trim();
+            const password = document.getElementById('decryptPassword').value;
+            const saltBase64 = document.getElementById('salt').value.trim();
+            const ivBase64 = document.getElementById('iv').value.trim();
+            
+            try {
+                // Конвертируем из Base64
+                const encryptedData = Uint8Array.from(atob(encryptedKey), c => c.charCodeAt(0));
+                const salt = saltBase64 ? Uint8Array.from(atob(saltBase64), c => c.charCodeAt(0)) : new Uint8Array(16);
+                const iv = ivBase64 ? Uint8Array.from(atob(ivBase64), c => c.charCodeAt(0)) : new Uint8Array(12);
+                
+                // Создаем ключ из пароля
+                const keyMaterial = await window.crypto.subtle.importKey(
+                    'raw',
+                    new TextEncoder().encode(password),
+                    { name: 'PBKDF2' },
+                    false,
+                    ['deriveBits', 'deriveKey']
+                );
+                
+                const key = await window.crypto.subtle.deriveKey(
+                    {
+                        name: 'PBKDF2',
+                        salt: salt,
+                        iterations: 100000,
+                        hash: 'SHA-256'
+                    },
+                    keyMaterial,
+                    { name: 'AES-GCM', length: 256 },
+                    false,
+                    ['decrypt']
+                );
+                
+                // Дешифруем приватный ключ
+                const decrypted = await window.crypto.subtle.decrypt(
+                    {
+                        name: 'AES-GCM',
+                        iv: iv
+                    },
+                    key,
+                    encryptedData
+                );
+                
+                // Показываем результат
+                const decryptedText = new TextDecoder().decode(decrypted);
+                document.getElementById('decryptedKeyOutput').textContent = decryptedText;
+                document.getElementById('decryptKeyResult').style.display = 'block';
+                
+            } catch (error) {
+                alert('Ошибка дешифрования ключа: ' + error.message);
                 console.error(error);
             }
         });
