@@ -333,14 +333,20 @@
                 const encrypted = await window.crypto.subtle.encrypt(
                     {
                         name: 'AES-GCM',
-                        iv: iv
+                        iv: iv,
+                        tagLength: 128
                     },
                     key,
                     new TextEncoder().encode(privateKeyPem)
                 );
+                // Извлекаем auth tag (последние 16 байт)
+                const encryptedBytes = new Uint8Array(encrypted);
+                const ciphertext = encryptedBytes.slice(0, -16); // Все кроме последних 16 байт
+                const authTag = encryptedBytes.slice(-16); // Последние 16 байт - auth tag
                 
                 // Конвертируем в Base64
-                const encryptedBase64 = btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+                const encryptedBase64 = btoa(String.fromCharCode(...ciphertext));
+                const authTagBase64 = btoa(String.fromCharCode(...authTag));
                 const saltBase64 = btoa(String.fromCharCode(...salt));
                 const ivBase64 = btoa(String.fromCharCode(...iv));
                 
@@ -349,6 +355,7 @@
                 document.getElementById('decryptionParams').innerHTML = `
                     <p><strong>Соль:</strong> ${saltBase64}</p>
                     <p><strong>IV:</strong> ${ivBase64}</p>
+                    <p><strong>Auth Tag:</strong> ${authTagBase64}</p>
                     <p><strong>Алгоритм:</strong> AES-GCM с PBKDF2</p>
                 `;
                 document.getElementById('protectionResult').style.display = 'block';
