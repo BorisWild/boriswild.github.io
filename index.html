@@ -387,7 +387,7 @@
             
             try {
                 // Конвертируем из Base64
-                const encryptedData = Uint8Array.from(atob(encryptedKey), c => c.charCodeAt(0));
+                const ciphertext = Uint8Array.from(atob(encryptedKey), c => c.charCodeAt(0));
                 const salt = saltBase64 ? Uint8Array.from(atob(saltBase64), c => c.charCodeAt(0)) : new Uint8Array(16);
                 const iv = ivBase64 ? Uint8Array.from(atob(ivBase64), c => c.charCodeAt(0)) : new Uint8Array(12);
                 const authTag = Uint8Array.from(atob(authTagBase64), c => c.charCodeAt(0));
