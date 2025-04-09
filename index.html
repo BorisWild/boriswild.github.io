@@ -95,7 +95,15 @@
         <h2>Шифрование сообщения</h2>
         <form id="encryptForm">
             <label for="publicKey">Публичный ключ (PEM формат):</label>
-            <textarea id="publicKey" rows="6" required placeholder="-----BEGIN PUBLIC KEY-----..."></textarea>
+            <textarea id="publicKey" rows="6" required placeholder="-----BEGIN PUBLIC KEY-----...">-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuWGIicuku7m6H8V3M6TG
+PqoLAsclv1Ux1QrnPygHjIvipd3xUJmZfXGH13VM3TtKYG/ZUCiU23iZEOXDdpxG
+T+Vg7Ftm01T8QjHg1+wHxh6DZdQpI+4oqYnTtW96no0eCbZ6WUNiB2wkM+3E8C5n
+mjC5x+DMZ1mD31irx+PCuzA35suZO8utZVyAcAAIOfNrXyg1+/V+LVNEyCVFtUGh
+Y9BkXp9uK1hM50VuONiBc5wYC+oybhvD1lFKu1CWRBi4VikIcylPyh+lamXY3v5S
+uNRE6+zmfrZNyW0B7J0ms3kJAauwD2YICjRgU7D5tiOuH2bo6HUFTRB0BiPlmsMC
+OwIDAQAB
+-----END PUBLIC KEY-----</textarea>
 
             <label for="message">Сообщение для шифрования:</label>
             <textarea id="message" rows="4" required></textarea>
@@ -105,7 +113,7 @@
 
         <div id="encryptResult" class="result-block" style="display: none;">
             <h3>Результат шифрования (Base64):</h3>
-            <div id="encryptedOutput"></div>
+            <textarea id="encryptedOutput" rows="6" readonly></textarea>
             <button class="copy-btn" onclick="copyToClipboard('encryptedOutput')">Копировать</button>
         </div>
     </div>
@@ -265,7 +273,7 @@
                 const publicKey = await importPublicKey(publicKeyPem);
                 const encrypted = await encryptMessage(publicKey, message);
                 
-                document.getElementById('encryptedOutput').textContent = encrypted;
+                document.getElementById('encryptedOutput').value = encrypted;
                 document.getElementById('encryptResult').style.display = 'block';
             } catch (error) {
                 alert('Ошибка шифрования: ' + error.message);
