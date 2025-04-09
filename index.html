@@ -133,7 +133,7 @@ OwIDAQAB
 
         <div id="decryptResult" class="result-block" style="display: none;">
             <h3>Результат дешифрования:</h3>
-            <div id="decryptedOutput"></div>
+            <textarea id="decryptedOutput" rows="6" readonly></textarea>
             <button class="copy-btn" onclick="copyToClipboard('decryptedOutput')">Копировать</button>
         </div>
     </div>
@@ -292,7 +292,7 @@ OwIDAQAB
                 const privateKey = await importPrivateKey(privateKeyPem);
                 const decrypted = await decryptMessage(privateKey, encryptedMessage);
                 
-                document.getElementById('decryptedOutput').textContent = decrypted;
+                document.getElementById('decryptedOutput').value = decrypted;
                 document.getElementById('decryptResult').style.display = 'block';
             } catch (error) {
                 alert('Ошибка дешифрования: ' + error.message);
