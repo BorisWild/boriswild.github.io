@@ -1,4 +1,4 @@
-https://raw.githubusercontent.com/BorisWild/boriswild.github.io/edit/main/token-metadata.json
+https://raw.githubusercontent.com/BorisWild/boriswild.github.io/main/token-metadata.json
  
  
  
