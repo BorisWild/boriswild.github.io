@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solana Wallet Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <h2>Solana Wallet Generator</h2>
+  <button onclick="generateWallet()">Generate Wallet</button>
+
+  <h3>Public Key</h3>
+  <pre id="publicKey">—</pre>
+
+  <h3>Private Key (Secret Key – keep safe!)</h3>
+  <pre id="privateKey">—</pre>
+
+  <!-- Solana Web3.js -->
+  <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+  <!-- Base58 encoding -->
+  <script src="https://unpkg.com/bs58@5.0.0/dist/bs58.min.js"></script>
+
+  <script>
+    function generateWallet() {
+      const keypair = solanaWeb3.Keypair.generate();
+
+      const publicKey = keypair.publicKey.toBase58();
+      const privateKey = bs58.encode(keypair.secretKey);
+
+      document.getElementById("publicKey").textContent = publicKey;
+      document.getElementById("privateKey").textContent = privateKey;
+    }
+  </script>
+</body>
+</html>
